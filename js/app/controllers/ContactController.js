@@ -1,6 +1,6 @@
-function ContactController($rootScope) {
+function ContactController($rootScope, $scope) {
 
-    this.contacts = [
+    var contacts = this.contacts = [
         {
             "name": {
                 "title": "mr",
@@ -3002,6 +3002,12 @@ function ContactController($rootScope) {
             }
         }
     ];
+
+    var unbind = $rootScope.$on('removeContact', function(event,index){
+      contacts.splice(index,1);
+    });
+
+    $scope.$on('$destroy', unbind);
 }
 
 angular
